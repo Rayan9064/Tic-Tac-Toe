@@ -40,6 +40,9 @@ function App() {
     }
     // After every new value is created the checkWinner is called 
     checkWinner();
+    setTimeout( func => {
+    if(winner.lock != true && winner.isWinner == "") checkFull();
+    }, 10000);
   }
 
   const checkWinner = () => {
@@ -87,6 +90,17 @@ function App() {
       e.current.innerHTML = "";
     })
   }
+
+  function checkFull() {
+    let count=0;
+    board.map((box) => {
+      if(box != null){
+        count++;
+      }
+    })
+    if(count == 9) handleReset();
+  }
+
   return (
   <div className='container'>
     <h1 className='winner'>Tic Tac Toe Game in <span>React</span></h1>
